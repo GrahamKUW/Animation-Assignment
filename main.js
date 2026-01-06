@@ -22,10 +22,35 @@ ASSET_MANAGER.downloadAll(() => {
     32,
     32,
     false,
-    true
+    false
   );
 
-  gameEngine.addEntity(new Animation(msprite, 5, 0.5, 1, gameEngine));
+  const animations = [
+    new Animation(msprite, 5, 0.5, 1, gameEngine),
+    new Animation(msprite, 6, 0.5, 2, gameEngine),
+    new Animation(msprite, 3, 0.5, 3, gameEngine),
+    new Animation(msprite, 2, 0.5, 4, gameEngine),
+    new Animation(msprite, 4, 0.5, 5, gameEngine),
+    new Animation(msprite, 2, 0.5, 6, gameEngine),
+    new Animation(msprite, 5, 0.5, 7, gameEngine),
+    new Animation(msprite, 5, 0.5, 8, gameEngine),
+    new Animation(msprite, 5, 0.5, 9, gameEngine),
+    new Animation(msprite, 11, 0.5, 10, gameEngine),
+    new Animation(msprite, 4, 0.5, 11, gameEngine),
+    new Animation(msprite, 10, 0.5, 12, gameEngine),
+    new Animation(msprite, 11, 0.5, 13, gameEngine),
+  ];
+
+  const animController = new AnimationController();
+
+  for (let i = 0; i < animations.length; i++) {
+    animController.add(animations[i]);
+  }
+
+  animController.switch(0);
+
+  gameEngine.addEntity(animController);
+
   //gameEngine.addEntity(sprite);
   gameEngine.start();
 });

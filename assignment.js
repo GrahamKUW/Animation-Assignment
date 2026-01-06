@@ -82,10 +82,16 @@ class Animation {
     this.keyFrameDuration = duration / keyframes; // how long to stay on each keyframe;
     this.gameEngine = gameEngine;
     this.runningTime = 0;
-    this.msprite.cellPosY = rowOffset;
+
+    this.rowOffset = rowOffset;
+    this.playing = true;
   }
 
   update() {
+    if (!this.playing) {
+      return;
+    }
+
     this.runningTime += this.gameEngine.clockTick;
 
     if (this.runningTime >= this.keyFrameDuration) {
@@ -95,8 +101,51 @@ class Animation {
   }
 
   draw(ctx) {
+    this.msprite.cellPosY = this.rowOffset;
     this.msprite.cellPosX = this.currentFrame;
     this.msprite.draw(ctx);
+  }
+}
+
+/** Simple state machine that allows a single aniamtion to played at a time */
+class AnimationController {
+  constructor() {
+    this.currentAnimation = null;
+    this.playing = true;
+    this.animations = [];
+  }
+
+  update() {
+    if (this.currentAnimation != null) {
+      this.currentAnimation.playing = this.playing;
+      this.currentAnimation.update();
+    }
+  }
+
+  draw(ctx) {
+    if (this.currentAnimation != null) {
+      this.currentAnimation.draw(ctx);
+    }
+  }
+
+  add(anim) {
+    if (this.currentAnimation === null) {
+      this.currentAnimation = anim;
+    }
+
+    this.animations.push(anim);
+  }
+
+  switch(index) {
+    this.currentAnimation = this.animations[index];
+  }
+
+  play() {
+    this.playing = true;
+  }
+
+  pause() {
+    this.playing = false;
   }
 }
 
