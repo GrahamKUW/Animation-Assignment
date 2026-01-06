@@ -36,7 +36,7 @@ class MSprite {
   draw(ctx) {
     const cellImgX = this.cellPosX * this.cellSizeX;
     const cellImgY = this.cellPosY * this.cellSizeY;
-    const flippedStatus = this.flip ? -1 : 1; // assume facing right
+    const flippedStatus = this.flip ? -1 : 1; // assume facing right from start
 
     ctx.save();
     ctx.imageSmoothingEnabled = this.filter;
@@ -60,13 +60,14 @@ class MSprite {
 
 /** Single Image Sprite */
 class SSprite extends MSprite {
-  constructor(spritesheet, transform, filter = false) {
+  constructor(spritesheet, transform, filter = false, isFlipped = false) {
     super(
       spritesheet,
       transform,
-      spritesheet.height,
       spritesheet.width,
-      filter
+      spritesheet.height,
+      filter,
+      isFlipped
     );
   }
 }

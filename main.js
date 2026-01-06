@@ -10,6 +10,12 @@ ASSET_MANAGER.downloadAll(() => {
 
   gameEngine.init(ctx);
 
+  /*const sprite = new SSprite(
+    ASSET_MANAGER.getAsset("./assets/sprites/robosprite.png"),
+    new Transform(ctx.canvas.width / 2, ctx.canvas.height / 2, 0, 1, 1),
+    false,
+    true
+  );*/
   const msprite = new MSprite(
     ASSET_MANAGER.getAsset("./assets/sprites/robosprite.png"),
     new Transform(ctx.canvas.width / 2, ctx.canvas.height / 2, 0, 10, 10),
@@ -20,5 +26,6 @@ ASSET_MANAGER.downloadAll(() => {
   );
 
   gameEngine.addEntity(new Animation(msprite, 5, 0.5, 1, gameEngine));
+  //gameEngine.addEntity(sprite);
   gameEngine.start();
 });
