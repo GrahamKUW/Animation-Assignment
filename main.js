@@ -4,6 +4,7 @@ const ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./assets/sprites/robosprite.png");
 ASSET_MANAGER.queueDownload("./assets/sprites/buttonEmpty.png");
+ASSET_MANAGER.queueDownload("./assets/sprites/PausePlay.png");
 
 ASSET_MANAGER.downloadAll(() => {
   const canvas = document.getElementById("gameWorld");
@@ -25,6 +26,25 @@ ASSET_MANAGER.downloadAll(() => {
     false,
     false,
   );
+
+  const playMSprite = new MSprite(
+    ASSET_MANAGER.getAsset("./assets/sprites/PausePlay.png"),
+    new Transform(35, 365, 0, 5, 5),
+    16,
+    16,
+    false,
+    false,
+  );
+
+  const pauseMSprite = new MSprite(
+    ASSET_MANAGER.getAsset("./assets/sprites/PausePlay.png"),
+    new Transform(115, 365, 0, 5, 5),
+    16,
+    16,
+    false,
+    false,
+  );
+  pauseMSprite.cellPosX = 1;
 
   const buttonSprites = [];
   const buttonAmount = 5;
@@ -90,6 +110,16 @@ ASSET_MANAGER.downloadAll(() => {
     animController.switch(12);
   });
 
+  const playButton = new Button(playMSprite, gameEngine, "", () => {
+    animController.play();
+  });
+
+  const pauseButton = new Button(pauseMSprite, gameEngine, "", () => {
+    animController.pause();
+  });
+
+  gameEngine.addEntity(playButton);
+  gameEngine.addEntity(pauseButton);
   gameEngine.addEntity(animController);
   gameEngine.addEntity(idleButton);
   gameEngine.addEntity(walkButton);
