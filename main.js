@@ -65,13 +65,11 @@ ASSET_MANAGER.downloadAll(() => {
 
   animController.switch(0);
 
-  gameEngine.addEntity(animController);
-
   const idleButton = new Button(buttonSprites[0], gameEngine, "Idle", () => {
     animController.switch(0);
   });
 
-  const walkButton = new Button(buttonSprites[1], gameEngine, "Walk", () => {
+  const walkButton = new Button(buttonSprites[1], gameEngine, "Run", () => {
     animController.switch(1);
   });
 
@@ -92,6 +90,7 @@ ASSET_MANAGER.downloadAll(() => {
     animController.switch(12);
   });
 
+  gameEngine.addEntity(animController);
   gameEngine.addEntity(idleButton);
   gameEngine.addEntity(walkButton);
   gameEngine.addEntity(attackButton);
