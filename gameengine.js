@@ -11,6 +11,7 @@ class GameEngine {
 
     // Information on the input
     this.click = null;
+    this.hasClicked = false;
     this.mouse = null;
     this.wheel = null;
     this.keys = {};
@@ -74,11 +75,11 @@ class GameEngine {
 
     this.ctx.canvas.addEventListener(
       "keydown",
-      (event) => (this.keys[event.key] = true)
+      (event) => (this.keys[event.key] = true),
     );
     this.ctx.canvas.addEventListener(
       "keyup",
-      (event) => (this.keys[event.key] = false)
+      (event) => (this.keys[event.key] = false),
     );
   }
 
